@@ -20,7 +20,7 @@ def mandelbrot(c):
     count = 0;
     while abs(z) < 2 and count < 80: 
         z = z * z + c;
-        count+=1;
+        count+=0.5;
     return count;
 #end mandelbrot function--------------------------------
 
@@ -45,16 +45,16 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                pygame.quit()
-        t+=.004 #make this number SMALLER to increase picture resolution
+        t+=.005 #make this number SMALLER to increase picture resolution
     
         m = -2 #lower bound for imaginary axis
         while m<2: #upper bound for imaginary (vertical) axis
-            m+=.004 #make this number SMALLER to increase picture resolution
+            m+=.005 #make this number SMALLER to increase picture resolution
         
             c = complex(t, m) #create a complex number from iterators
             num = mandelbrot(c); #call the function
-            x = int(t * 200 + 400)
-            y = int(m * 200 + 400)
+            x = int(t * 700 + 900)
+            y = int(m * 700 + 900)
             if x > 0 and x < 800 and y > 0 and y < 800:
                 #these if statements are just to differentiate the colors more, not needed if you want black & white image
                 screen.set_at((x, y), rainbow(num % 360 * 1/8 * 420))
@@ -63,8 +63,12 @@ def run():
 
 t1=threading.Thread(target=run)
 t2=threading.Thread(target=run)
+t3=threading.Thread(target=run)
+t4=threading.Thread(target=run)
 
 t1.start()
 t2.start()
+t3.start()
+t4.start()
 #pygame.time.wait(10000)#pause to see the picture
 #quit pygame
